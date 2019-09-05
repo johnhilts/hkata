@@ -9,5 +9,28 @@ import Data.List (sort)
 --
 -- >>> isIsogram ""
 -- True
+--
+-- >>> isIsogram "aa"
+-- False
+--
+-- >>> isIsogram "aba"
+-- False
+--
+-- >>> isIsogram "abb"
+-- False
+--
+-- >>> isIsogram "abc"
+-- True
+--
+-- >>> isIsogram "moOse"
+-- False
+--
+-- >>> isIsogram "abca"
+-- False
 isIsogram :: String -> Bool
-isIsogram = undefined
+isIsogram = fmap toLower >>> sort >>> go
+    where 
+        go (a:b:rest)
+            | a == b = False
+            | otherwise = go (b:rest)
+        go _ = True
